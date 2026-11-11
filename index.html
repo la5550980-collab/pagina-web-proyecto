@@ -1,0 +1,584 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Playlists Favoritas | Top México</title>
+
+    <!-- Bootstrap: diseño adaptable -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 75px;
+        }
+
+        body {
+            margin: 0;
+            background: #fff176;
+            color: #302600;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* MENÚ */
+        .navbar {
+            background: #302600;
+            border-bottom: 3px solid #ffca28;
+        }
+
+        .navbar-brand {
+            color: #ffeb3b !important;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            color: white !important;
+        }
+
+        .nav-link:hover {
+            color: #ffeb3b !important;
+        }
+
+        /* PORTADA */
+        .portada {
+            padding: 100px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #fdd835, #ffb300, #fff176);
+            border-bottom: 4px solid #302600;
+        }
+
+        .portada h1 {
+            font-size: clamp(35px, 6vw, 65px);
+            font-weight: 900;
+            color: #302600;
+            text-shadow: 2px 2px #fff3a0;
+        }
+
+        .etiqueta {
+            letter-spacing: 4px;
+            font-weight: bold;
+        }
+
+        .subtitulo {
+            margin: 20px auto 30px;
+            max-width: 650px;
+            font-size: 18px;
+        }
+
+        /* SECCIONES */
+        .seccion {
+            padding-top: 65px;
+            padding-bottom: 65px;
+        }
+
+        .titulo {
+            text-align: center;
+            font-weight: bold;
+            color: #5b4300;
+            margin-bottom: 15px;
+        }
+
+        .descripcion {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        /* TARJETAS */
+        .tarjeta {
+            height: 100%;
+            background: #fff9c4;
+            border: 2px solid #e0aa00;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px #79550020;
+            transition: transform 0.25s;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-6px);
+        }
+
+        .tarjeta .card-body {
+            padding: 24px;
+        }
+
+        .card-title {
+            color: #795500;
+            font-weight: bold;
+        }
+
+        .card-text {
+            color: #51431e;
+            line-height: 1.7;
+        }
+
+        /* PORTADAS DECORATIVAS */
+        .arte {
+            min-height: 210px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+
+        .arte h3 {
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-size: 25px;
+        }
+
+        .nota {
+            font-size: 65px;
+            color: #ffeb3b;
+            text-shadow: 0 0 15px #ffd54f;
+        }
+
+        .arte-neton {
+            background: linear-gradient(135deg, #a66d15, #302600);
+        }
+
+        .arte-musica {
+            background: linear-gradient(135deg, #302600, #9b6a00);
+        }
+
+        .arte-noche {
+            background: linear-gradient(135deg, #171717, #705400);
+        }
+
+        /* BOTONES */
+        .btn-musica {
+            display: inline-block;
+            background: #302600;
+            color: #fff176;
+            border: 2px solid #302600;
+            border-radius: 25px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.25s;
+        }
+
+        .btn-musica:hover {
+            background: #634c00;
+            color: white;
+        }
+
+        /* CANCIONES */
+        .canciones {
+            background: #ffe082;
+            border-top: 3px solid #e0aa00;
+            border-bottom: 3px solid #e0aa00;
+        }
+
+        .lista-canciones {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .cancion {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px;
+            margin-bottom: 15px;
+            border-radius: 14px;
+            background: #fff8d6;
+            border: 1px solid #d6a000;
+        }
+
+        .icono-cancion {
+            font-size: 32px;
+            color: #b88600;
+        }
+
+        .cancion div {
+            flex: 1;
+        }
+
+        .cancion h5 {
+            font-weight: bold;
+            margin: 0 0 5px;
+        }
+
+        .cancion p {
+            margin: 0;
+        }
+
+        /* CONTACTO */
+        .contacto {
+            max-width: 550px;
+            margin: auto;
+            padding: 30px;
+            background: #fff9c4;
+            border: 2px solid #d6a000;
+            border-radius: 18px;
+        }
+
+        /* PIE DE PÁGINA */
+        footer {
+            padding: 25px 15px;
+            text-align: center;
+            background: #302600;
+            color: #fff176;
+            border-top: 4px solid #ffca28;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+        /* CELULARES */
+        @media (max-width: 576px) {
+            .portada {
+                padding: 65px 15px;
+            }
+
+            .etiqueta {
+                letter-spacing: 2px;
+            }
+
+            .cancion {
+                flex-wrap: wrap;
+            }
+
+            .seccion {
+                padding-top: 45px;
+                padding-bottom: 45px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#inicio">🎧 Mi Playlist</a>
+
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menu"
+                    aria-controls="menu"
+                    aria-expanded="false"
+                    aria-label="Abrir menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#artistas">Artistas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#top-mexico">Top México</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#canciones">Canciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PORTADA -->
+    <header id="inicio" class="portada">
+        <div class="container">
+            <p class="etiqueta">MÚSICA • ESTILO • EMOCIONES</p>
+
+            <h1>PLAYLISTS FAVORITAS</h1>
+
+            <p class="subtitulo">
+                Bienvenido a mi espacio musical. Descubre artistas,
+                explora canciones y disfruta de la música mexicana.
+            </p>
+
+            <a href="#top-mexico" class="btn-musica">
+                Descubrir artistas 🎵
+            </a>
+        </div>
+    </header>
+
+    <!-- ARTISTA PRINCIPAL -->
+    <section id="artistas" class="container seccion">
+        <h2 class="titulo">⭐ Mi artista favorito</h2>
+
+        <p class="descripcion">
+            Neton Vega es el protagonista de mi playlist.
+        </p>
+
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-6">
+                <article class="card tarjeta">
+                    <div class="arte arte-neton">
+                        <span class="nota">♫</span>
+                        <h3>NETON VEGA</h3>
+                        <p>Corridos y música mexicana</p>
+                    </div>
+
+                    <div class="card-body text-center">
+                        <h3 class="card-title">Neton Vega</h3>
+
+                        <p class="card-text">
+                            Cantante y compositor mexicano relacionado
+                            con los corridos tumbados y la música
+                            mexicana contemporánea.
+                        </p>
+
+                        <a class="btn-musica"
+                           href="https://www.youtube.com/results?search_query=Neton+Vega"
+                           target="_blank" rel="noopener noreferrer">
+                            Buscar canciones ▶
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOP DE MÉXICO -->
+    <section id="top-mexico" class="container seccion">
+        <h2 class="titulo">🇲🇽 Artistas Top de México</h2>
+
+        <p class="descripcion">
+            Artistas destacados de la música mexicana actual.
+        </p>
+
+        <div class="row g-4">
+
+            <div class="col-sm-6 col-lg-4">
+                <article class="card tarjeta">
+                    <div class="arte arte-neton">
+                        <span class="nota">♫</span>
+                        <h3>NETON VEGA</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Neton Vega</h4>
+                        <p class="card-text">
+                            Reconocido por su estilo dentro de los
+                            corridos tumbados y la música mexicana.
+                        </p>
+                        <a class="btn-musica"
+                           href="https://www.youtube.com/results?search_query=Neton+Vega"
+                           target="_blank" rel="noopener noreferrer">
+                            Ver canciones
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-sm-6 col-lg-4">
+                <article class="card tarjeta">
+                    <div class="arte arte-musica">
+                        <span class="nota">♫</span>
+                        <h3>PESO PLUMA</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Peso Pluma</h4>
+                        <p class="card-text">
+                            Cantante mexicano conocido por sus éxitos
+                            y su influencia en los corridos tumbados.
+                        </p>
+                        <a class="btn-musica"
+                           href="https://www.youtube.com/results?search_query=Peso+Pluma"
+                           target="_blank" rel="noopener noreferrer">
+                            Ver canciones
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-sm-6 col-lg-4">
+                <article class="card tarjeta">
+                    <div class="arte arte-noche">
+                        <span class="nota">♫</span>
+                        <h3>NATANAEL CANO</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Natanael Cano</h4>
+                        <p class="card-text">
+                            Una de las figuras destacadas del movimiento
+                            de corridos tumbados.
+                        </p>
+                        <a class="btn-musica"
+                           href="https://www.youtube.com/results?search_query=Natanael+Cano"
+                           target="_blank" rel="noopener noreferrer">
+                            Ver canciones
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-sm-6 col-lg-6">
+                <article class="card tarjeta">
+                    <div class="arte arte-musica">
+                        <span class="nota">♫ ♪</span>
+                        <h3>FUERZA REGIDA</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Fuerza Regida</h4>
+                        <p class="card-text">
+                            Grupo que combina sonidos modernos con
+                            la música regional mexicana.
+                        </p>
+                        <a class="btn-musica"
+                           href="https://www.youtube.com/results?search_query=Fuerza+Regida"
+                           target="_blank" rel="noopener noreferrer">
+                            Ver canciones
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-sm-6 col-lg-6">
+                <article class="card tarjeta">
+                    <div class="arte arte-neton">
+                        <span class="nota">♫</span>
+                        <h3>JUNIOR H</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Junior H</h4>
+                        <p class="card-text">
+                            Cantante mexicano conocido por sus canciones
+                            de corridos tumbados y música regional.
+                        </p>
+                        <a class="btn-musica"
+                           href="https://www.youtube.com/results?search_query=Junior+H"
+                           target="_blank" rel="noopener noreferrer">
+                            Ver canciones
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CANCIONES FAVORITAS -->
+    <section id="canciones" class="seccion canciones">
+        <div class="container">
+            <h2 class="titulo">🎶 Canciones favoritas</h2>
+
+            <p class="descripcion">
+                Pulsa los botones para encontrar canciones de tus artistas.
+            </p>
+
+            <div class="lista-canciones">
+
+                <div class="cancion">
+                    <span class="icono-cancion">♫</span>
+                    <div>
+                        <h5>Neton Vega</h5>
+                        <p>Artista favorito</p>
+                    </div>
+                    <a class="btn btn-outline-dark btn-sm"
+                       href="https://www.youtube.com/results?search_query=Neton+Vega+canciones"
+                       target="_blank" rel="noopener noreferrer">
+                        Buscar ▶
+                    </a>
+                </div>
+
+                <div class="cancion">
+                    <span class="icono-cancion">♫</span>
+                    <div>
+                        <h5>Peso Pluma</h5>
+                        <p>Éxitos mexicanos</p>
+                    </div>
+                    <a class="btn btn-outline-dark btn-sm"
+                       href="https://www.youtube.com/results?search_query=Peso+Pluma+canciones"
+                       target="_blank" rel="noopener noreferrer">
+                        Buscar ▶
+                    </a>
+                </div>
+
+                <div class="cancion">
+                    <span class="icono-cancion">♫</span>
+                    <div>
+                        <h5>Natanael Cano</h5>
+                        <p>Corridos tumbados</p>
+                    </div>
+                    <a class="btn btn-outline-dark btn-sm"
+                       href="https://www.youtube.com/results?search_query=Natanael+Cano+canciones"
+                       target="_blank" rel="noopener noreferrer">
+                        Buscar ▶
+                    </a>
+                </div>
+
+                <div class="cancion">
+                    <span class="icono-cancion">♫</span>
+                    <div>
+                        <h5>Fuerza Regida</h5>
+                        <p>Regional mexicano</p>
+                    </div>
+                    <a class="btn btn-outline-dark btn-sm"
+                       href="https://www.youtube.com/results?search_query=Fuerza+Regida+canciones"
+                       target="_blank" rel="noopener noreferrer">
+                        Buscar ▶
+                    </a>
+                </div>
+
+                <div class="cancion">
+                    <span class="icono-cancion">♫</span>
+                    <div>
+                        <h5>Junior H</h5>
+                        <p>Mi selección musical</p>
+                    </div>
+                    <a class="btn btn-outline-dark btn-sm"
+                       href="https://www.youtube.com/results?search_query=Junior+H+canciones"
+                       target="_blank" rel="noopener noreferrer">
+                        Buscar ▶
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="container seccion">
+        <h2 class="titulo">📩 Contacto</h2>
+
+        <p class="descripcion">
+            Comparte tus gustos musicales y descubre nuevos artistas.
+        </p>
+
+        <div class="contacto">
+            <p><strong>Nombre:</strong> Playlists Favoritas</p>
+            <p><strong>Tema:</strong> Música mexicana</p>
+            <p><strong>Artista destacado:</strong> Neton Vega</p>
+
+            <a class="btn-musica"
+               href="https://www.youtube.com/results?search_query=musica+mexicana"
+               target="_blank" rel="noopener noreferrer">
+                Descubrir música 🎧
+            </a>
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <p><strong>🎵 PLAYLISTS FAVORITAS</strong></p>
+        <p>Proyecto escolar realizado con HTML, CSS y Bootstrap.</p>
+        <p>© 2026 | Música y creatividad ♡</p>
+    </footer>
+
+    <!-- Bootstrap JS para el menú móvil -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+```
